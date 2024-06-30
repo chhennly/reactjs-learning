@@ -3,7 +3,7 @@ function Card(props) {
     // const {imageURL, desc} = props
     return(
         <>
-                <div className="card" style={{width: '18rem', height: '44rem'}}>
+                <div className="card" style={{ height: '44rem'}}>
                     <img src={props.imageURL} className="card-img-top" alt="card image"/>
                     <div className="card-body">
                         <h3 className="text-danger">{props.price + '$'}</h3>
