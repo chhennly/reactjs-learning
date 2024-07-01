@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { fetchCategories, insertProduct } from '../services/productAction'
+import { fetchCategories, fileUploadToServer, insertProduct } from '../services/productAction'
 
 export default function ProductForm() {
 
@@ -25,20 +25,38 @@ export default function ProductForm() {
         } )
         console.log(product)
     }
-    const onFileUpload = (e) => { // e = event
+
+
+    const onPreviewImage = (e) => { // e = event
         console.log(e.target.files)
         setSource(e.target.files[0])
     }
 
     const hendleOnSubmit = () => {
         console.log('on submit')
-        insertProduct(product)
+
+        // create image object as form data
+        const formData = new FormData()
+        formData.append("file", source)
+        // -----function to upload image data to server-----
+        fileUploadToServer(formData)
         .then(res => {
-            if (res.status == 201){
-                alert("Created")
-            }
+            product.images = [res.data.location]
+            console.log(product.images)
+            // -----insert product including image
+            insertProduct(product)
+            .then(res => res.json())
+            .then(resp => console.log(resp))
         })
-        .then(resp => console.log(resp))
+        // -----end function-----
+
+        // insertProduct(product)
+        // .then(res => {
+        //     if (res.status == 201){
+        //         alert("Created")
+        //     }
+        // })
+        // .then(resp => console.log(resp))
     }
 
     useEffect(() => {
@@ -94,6 +112,7 @@ export default function ProductForm() {
                 onChange={onChangeHandler}
             ></textarea>
         </div>
+        {/* preview area */}
         <div className="mb-3 preview">
             <img 
                 src={source && URL.createObjectURL(source)} 
@@ -101,8 +120,9 @@ export default function ProductForm() {
                 style={{width: 100}}
             />
         </div>
+        {/* choose file area */}
         <div className="mb-3">
-            <input className="form-control" style={{width: 300}} type='file' onChange={onFileUpload} />
+            <input className="form-control" style={{width: 300}} type='file' onChange={onPreviewImage} />
         </div>
         <button 
             type="button" 

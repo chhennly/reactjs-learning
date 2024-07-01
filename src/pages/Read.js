@@ -28,7 +28,7 @@ export default function Read() {
         <h2>
           {product.title}
         </h2>
-        <img src={product.images[0]} alt="image" />
+        <img style={{width: 300}} src={product.images[0]} alt="image" />
         <h3 className="text-danger">
           {product.price + "$"}
         </h3>
