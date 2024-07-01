@@ -14,7 +14,7 @@ export default function Dashboard() {
         },
         {
             name: 'Price',
-            selector: row => row.price,
+            selector: row => row.price + ' $',
             sortable: true
         },
         {

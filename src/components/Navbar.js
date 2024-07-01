@@ -15,7 +15,7 @@ export default function Navbar() {
         <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
         <li><a href="/" class="nav-link px-2">Features</a></li>
         <li><a href="/" class="nav-link px-2">Pricing</a></li>
-        <li><a href="/" class="nav-link px-2">FAQs</a></li>
+        <li><Link to="/datatable" class="nav-link px-2">Dashboard</Link></li>
         <li><Link to="/about-us" class="nav-link px-2">About</Link></li>
       </ul>
 

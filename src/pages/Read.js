@@ -25,16 +25,20 @@ export default function Read() {
   
   return (
     <main className='container'>
-        <h2>
-          {product.title}
-        </h2>
-        <img style={{width: 300}} src={product.images[0]} alt="image" />
-        <h3 className="text-danger">
-          {product.price + "$"}
-        </h3>
-        <p>
-          {product.description}
-        </p>
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src={product.images[0]} class="img-fluid rounded-start" alt="Product Image"/>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h3 class="card-title">{product.title}</h3>
+              <h3 class="card-title text-danger">{product.price + "$"}</h3>
+              <p class="card-text">{product.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   )
 }
