@@ -4,6 +4,7 @@ import { fetchCategories, insertProduct } from '../services/productAction'
 export default function ProductForm() {
 
     const [categories, setCategories] = useState([])
+    const [source, setSource] = useState("")
     const [product, setProduct] = useState({
         title: "",
         price: 0,
@@ -23,6 +24,10 @@ export default function ProductForm() {
             }
         } )
         console.log(product)
+    }
+    const onFileUpload = (e) => { // e = event
+        console.log(e.target.files)
+        setSource(e.target.files[0])
     }
 
     const hendleOnSubmit = () => {
@@ -88,6 +93,16 @@ export default function ProductForm() {
                 rows="3"
                 onChange={onChangeHandler}
             ></textarea>
+        </div>
+        <div className="mb-3 preview">
+            <img 
+                src={source && URL.createObjectURL(source)} 
+                alt='Preview Image' 
+                style={{width: 100}}
+            />
+        </div>
+        <div className="mb-3">
+            <input className="form-control" style={{width: 300}} type='file' onChange={onFileUpload} />
         </div>
         <button 
             type="button" 
