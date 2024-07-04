@@ -40,3 +40,17 @@ export const fileUploadToServer = async (image) => {
     })
     return resp
 }
+
+// Update product by product id
+export const updateProduct = async (product, id) => {
+    let resp = await fetch(`${base_URL}products/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(product)
+    })
+    
+    return resp
+}
+
