@@ -4,21 +4,34 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import LoadingView from '../components/LoadingView'
 import { Link } from 'react-router-dom'
-import { fetchProducts } from '../services/productAction'
+import { fetchAllCategories, fetchProducts } from '../services/productAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAllProducts } from '../redux/actions/productActions'
 
 export default function Home() {
-    // declare variable
-    const [products, setProducts] = useState([])
+
+  const dispatch = useDispatch()
+  const {products} = useSelector(state => state.prodReducer)
+  const {categories} = useSelector(state => state.prodReducer)
+
+    // declare local state
+    // const [products, setProducts] = useState([])
     const [isLoading, setLoading] = useState(true)
 
     useEffect(() => {
+      // subscribe to store
+
+      dispatch(fetchAllProducts())
+      dispatch(fetchAllCategories())
+
       // call to api
-      console.log("Home page started")
-      fetchProducts()
-      .then(resp => {
-        setLoading(false)
-        setProducts(resp)
-      })
+   
+      // fetchProducts()
+      // .then(resp => {
+      //   setLoading(false)
+      //   setProducts(resp)
+      // })
+
     }, [])
 
   return (
@@ -28,7 +41,13 @@ export default function Home() {
      */}
       <main className='container'>
         <h3>Products</h3>
-        <div className='row g-3'>
+        {
+          console.log(products && products)
+        }
+        {
+          console.log(categories)
+        }
+        {/* <div className='row g-3'>
           {
             isLoading ? 
             
@@ -77,7 +96,7 @@ export default function Home() {
               </div>
             ))
           }
-        </div>
+        </div> */}
       </main>
     </>
   )

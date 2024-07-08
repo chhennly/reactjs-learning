@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component'
-import { fetchProducts } from '../services/productAction';
+import { searchProduct } from '../services/productAction';
 import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
     const navigate = useNavigate()
     // declare state product
-    const [filterProduct, setFilterProducts] = useState([])
+    const [products, setProducts] = useState([])
     const [search, setSearch] = useState("")
 
     const columns = [
@@ -34,26 +34,16 @@ export default function Dashboard() {
                 >Edit</button>
         }
     ];
-    
-
 
     useEffect(() => {
-        fetchProducts()
-        .then(resp => setFilterProducts(resp))
-    }, [])
-
-    useEffect(() => {
-        const result = filterProduct.filter(pro => {
-            return pro.title && pro.title.toLowerCase().match(search.toLowerCase())
-        })
-        setFilterProducts(result)
+        searchProduct(search).then(resp => setProducts(resp))
     }, [search])
 
   return (
     <main className='container'>
         <DataTable 
             columns={columns}
-            data={filterProduct}
+            data={products}
             pagination
             subHeader
             subHeaderComponent={

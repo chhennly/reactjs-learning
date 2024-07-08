@@ -4,17 +4,20 @@ import { useNavigate } from 'react-router-dom'
 export default function NotFound() {
     const navigate = useNavigate()
   return (
-    <main className="container my-5">
-        <div className="p-5 text-center bg-body-tertiary rounded-3">
-            <h1 className="text-body-emphasis">The page you are visiting is not found!  <svg xmlns="http://www.w3.org/2000/svg"  height="1em" viewBox="0 0 512 512"><path fill="#FFD43B" d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg></h1>
-           
-            <div className="d-inline-flex gap-2 mb-5">
+    <main>
+        <div className="p-5 text-center rounded-3">
+          <div>
+            <img src='https://admiral.digital/wp-content/uploads/2023/08/404_page-not-found.png' 
+            className="col-12 col-sm-12 col-md-12 col-lg-11 col-xl-8 col-xxl-8 mx-auto fs-5" 
+            alt='Page NotFound'/>
+          </div>
+          <div className="mt-5">
             <button 
                 onClick={() => navigate("/")}
                 className="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
-                Return Homepage
+                BACK TO HOME
             </button>
-            </div>
+          </div>
         </div>
     </main>
   )
